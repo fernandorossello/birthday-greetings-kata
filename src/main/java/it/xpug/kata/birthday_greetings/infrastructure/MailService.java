@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings.infrastructure;
 
+import it.xpug.kata.birthday_greetings.application.INotificationService;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -7,7 +9,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class MailService {
+public class MailService implements INotificationService {
 
     public static final String MAIL_SMTP_HOST = "mail.smtp.host";
     public static final String MAIL_SMTP_PORT = "mail.smtp.port";
