@@ -3,6 +3,7 @@ package it.xpug.kata.birthday_greetings.application;
 import it.xpug.kata.birthday_greetings.domain.Employee;
 import it.xpug.kata.birthday_greetings.domain.Message;
 import it.xpug.kata.birthday_greetings.domain.XDate;
+import it.xpug.kata.birthday_greetings.domain.exceptions.DataExtractionException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,7 +23,7 @@ public class BirthdayService {
 		this.employeeRepository = employeeRepository;
 	}
 
-	public void sendGreetings(XDate xDate) throws IOException, ParseException {
+	public void sendGreetings(XDate xDate) throws DataExtractionException, ParseException {
 		List<Employee> employees = employeeRepository.getEmployees();
 		for (Employee employee: employees) {
 			if (employee.isBirthday(xDate)) {

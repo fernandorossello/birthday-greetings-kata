@@ -2,6 +2,7 @@ package it.xpug.kata.birthday_greetings.infrastructure.repositories;
 
 import it.xpug.kata.birthday_greetings.application.EmployeeRepository;
 import it.xpug.kata.birthday_greetings.domain.Employee;
+import it.xpug.kata.birthday_greetings.domain.exceptions.DataExtractionException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,15 +24,21 @@ public class EmployeeFileRepository implements EmployeeRepository {
         this.fileName = filename;
     }
 
-    public List<Employee> getEmployees() throws IOException, ParseException {
-        BufferedReader in = new BufferedReader(new FileReader(this.fileName));
-        LinkedList<Employee> employees = new LinkedList<>();
-        String str;
-        in.readLine(); // skip header
-        while ((str = in.readLine()) != null) {
-            String[] employeeData = str.split(SEPARATION_TOKEN);
-            employees.add(new Employee(employeeData[FIRST_NAME], employeeData[LAST_NAME], employeeData[BIRTHDATE], employeeData[EMAIL]));
+    public List<Employee> getEmployees() throws DataExtractionException, ParseException {
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(this.fileName));
+            LinkedList<Employee> employees = new LinkedList<>();
+            String str;
+            in.readLine(); // skip header
+            while ((str = in.readLine()) != null) {
+                String[] employeeData = str.split(SEPARATION_TOKEN);
+                employees.add(new Employee(employeeData[FIRST_NAME], employeeData[LAST_NAME], employeeData[BIRTHDATE], employeeData[EMAIL]));
+            }
+            return employees;
         }
-        return employees;
+        catch(IOException exception){
+            throw new DataExtractionException(exception);
+        }
+
     }
 }
