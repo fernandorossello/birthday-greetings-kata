@@ -8,7 +8,6 @@ import it.xpug.kata.birthday_greetings.domain.exceptions.DateFormatException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 

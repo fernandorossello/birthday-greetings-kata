@@ -19,7 +19,7 @@ public class AcceptanceTest {
 	private SimpleSmtpServer mailServer;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		mailServer = SimpleSmtpServer.start(NONSTANDARD_PORT);
 		MailService mailService = new MailService("localhost", NONSTANDARD_PORT);
 		EmployeeRepository employeeRepository = new EmployeeFileRepository("employee_data.txt");
