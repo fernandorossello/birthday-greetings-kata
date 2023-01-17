@@ -2,7 +2,7 @@ package it.xpug.kata.birthday_greetings.infrastructure;
 
 import it.xpug.kata.birthday_greetings.application.INotificationService;
 
-import javax.mail.Message;
+import it.xpug.kata.birthday_greetings.domain.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -21,17 +21,17 @@ public class MailService implements INotificationService {
         props.put(MAIL_SMTP_PORT, String.valueOf(smtpPort));
     }
 
-
-    public void sendMessage(String sender, String subject, String body, String recipient) throws MessagingException {
+    // TODO extract MessagingException
+    public void sendMessage(Message message) throws MessagingException {
         // Create a mail session
         Session session = Session.getInstance(props, null);
 
         // Construct the message
-        Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(sender));
-        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-        msg.setSubject(subject);
-        msg.setText(body);
+        javax.mail.Message msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress(message.getSender()));
+        msg.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(message.getRecipient()));
+        msg.setSubject(message.getSubject());
+        msg.setText(message.getBody());
 
         // Send the message
         Transport.send(msg);

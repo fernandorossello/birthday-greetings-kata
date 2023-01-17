@@ -1,6 +1,7 @@
 package it.xpug.kata.birthday_greetings.application;
 
 import it.xpug.kata.birthday_greetings.domain.Employee;
+import it.xpug.kata.birthday_greetings.domain.Message;
 import it.xpug.kata.birthday_greetings.domain.XDate;
 
 import javax.mail.MessagingException;
@@ -29,7 +30,8 @@ public class BirthdayService {
 				String recipient = employee.getEmail();
 				String body = "Happy Birthday, dear %NAME%".replace("%NAME%", employee.getFirstName());
 				String subject = "Happy Birthday!";
-				mailService.sendMessage("sender@here.com", subject, body, recipient);
+				Message message = new Message("sender@here.com", subject, body, recipient);
+				mailService.sendMessage(message);
 			}
 		}
 	}

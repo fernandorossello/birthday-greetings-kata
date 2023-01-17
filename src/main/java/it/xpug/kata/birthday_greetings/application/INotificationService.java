@@ -1,7 +1,9 @@
 package it.xpug.kata.birthday_greetings.application;
 
+import it.xpug.kata.birthday_greetings.domain.Message;
+
 import javax.mail.MessagingException;
 
 public interface INotificationService {
-    void sendMessage(String sender, String subject, String body, String recipient) throws MessagingException;
+    void sendMessage(Message message ) throws MessagingException;
 }
