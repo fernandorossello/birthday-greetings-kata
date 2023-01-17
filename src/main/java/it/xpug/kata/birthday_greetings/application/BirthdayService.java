@@ -4,6 +4,7 @@ import it.xpug.kata.birthday_greetings.domain.Employee;
 import it.xpug.kata.birthday_greetings.domain.Message;
 import it.xpug.kata.birthday_greetings.domain.XDate;
 import it.xpug.kata.birthday_greetings.domain.exceptions.DataExtractionException;
+import it.xpug.kata.birthday_greetings.domain.exceptions.DateFormatException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +24,7 @@ public class BirthdayService {
 		this.employeeRepository = employeeRepository;
 	}
 
-	public void sendGreetings(XDate xDate) throws DataExtractionException, ParseException {
+	public void sendGreetings(XDate xDate) throws DataExtractionException, DateFormatException {
 		List<Employee> employees = employeeRepository.getEmployees();
 		for (Employee employee: employees) {
 			if (employee.isBirthday(xDate)) {

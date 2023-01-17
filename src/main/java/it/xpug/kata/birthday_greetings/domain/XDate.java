@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings.domain;
 
+import it.xpug.kata.birthday_greetings.domain.exceptions.DateFormatException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,8 +15,13 @@ public class XDate {
 		date = new Date();
 	}
 
-	public XDate(String yyyyMMdd) throws ParseException {
-		date = new SimpleDateFormat("yyyy/MM/dd").parse(yyyyMMdd);
+	public XDate(String yyyyMMdd) throws DateFormatException {
+		try {
+			date = new SimpleDateFormat("yyyy/MM/dd").parse(yyyyMMdd);
+		}
+		catch(ParseException exception) {
+			throw new DateFormatException(exception);
+		}
 	}
 
 	public int getDay() {

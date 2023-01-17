@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings.domain;
 
+import it.xpug.kata.birthday_greetings.domain.exceptions.DateFormatException;
+
 import java.text.ParseException;
 
 public class Employee {
@@ -10,7 +12,7 @@ public class Employee {
     private final String email;
 
     public Employee(String firstName, String lastName, String birthDate, String email)
-        throws ParseException {
+        throws DateFormatException {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = new XDate(birthDate);
